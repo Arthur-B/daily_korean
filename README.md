@@ -17,5 +17,6 @@ Run the script. Consider making a batch file or something to run it as an execut
 # To-do list
 - Make an exec file or something similar (using a batch file so far)
 - Send an email without getting banned from Google (just printing so far)
+- Add more vocabulary lists
 
 
