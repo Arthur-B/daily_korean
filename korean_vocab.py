@@ -12,17 +12,22 @@ If the script didn't run in the past days it should send the missing vocabulary.
 
 import openpyxl #  excel files
 import datetime # date format
-#import smtplib # Email
+
 
 #==============================================================================
 # Parameters
 
-filename = 'Ewha study guide 1.xlsx'          # Filename
+filename = 'Ewha study guide - edit.xlsx'   # Filename
 dt_start = datetime.datetime(2017, 6, 11)   # Starting day: Year, month, day
 words_per_day = 5                           # Words learned per day
 
-wb = openpyxl.load_workbook(filename)
-sheet = wb.get_sheet_by_name('Sheet1')
+
+#==============================================================================
+# Open the file and get the data 
+
+wb = openpyxl.load_workbook('./Vocabulary lists (edited)/' + filename) # Open the file we will use
+sheet = wb.get_sheet_by_name('Sheet1') # Get the sheet
+
 
 #==============================================================================
 # Write datetime from the Starting day to the end of the list
@@ -36,6 +41,7 @@ if dt_start.strftime('%m/%d/%Y') != sheet.cell(row=1, column=3).value:
         test = (i-1) // words_per_day
         sheet.cell(row=i, column=3).value = (dt_start + delta * test).strftime('%m/%d/%Y')
         i += 1
+
 
 #==============================================================================
 # List of words for the day
@@ -57,30 +63,23 @@ while (date_test < dt):
 
 wb.save(filename)
 
+
 #==============================================================================
 # Print vocabulary
+
 for i in range(len(ls_today)):
     print(ls_today[i][0], ls_today[i][1])
-    
-    
-    
+       
     
 #======================
-#
-## -*- coding: utf-8 -*-
-#"""
-#Spyder Editor
-#
-#This is a temporary script file.
-#"""
 #
 #import smtplib
 #
 #smtpObj = smtplib.SMTP('smtp.gmail.com', 587)
 #smtpObj.ehlo()
 #smtpObj.starttls()
-#smtpObj.login('frindaejeon@gmail.com', '')
+#smtpObj.login('test@gmail.com', '')
 #
-#smtpObj.sendmail('frindaejeon@gmail.com', 'arthur.baucour@gmail.com', 'Subject: test\nTEST TEST')
+#smtpObj.sendmail('test@gmail.com', 'test2@gmail.com', 'Subject: test\nTEST TEST')
 #
 #smtpObj.quit()
