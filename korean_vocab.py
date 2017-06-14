@@ -17,15 +17,16 @@ import datetime # date format
 #==============================================================================
 # Parameters
 
-filename = 'Ewha study guide - edit.xlsx'   # Filename
-dt_start = datetime.datetime(2017, 6, 11)   # Starting day: Year, month, day
+filename = 'Ewha study guide 1-1 - edit.xlsx'    # Filename
+path = './Vocabulary lists (edited)/'       # Path to the file
+dt_start = datetime.datetime(2017, 6, 9)    # Starting day: Year, month, day
 words_per_day = 5                           # Words learned per day
 
 
 #==============================================================================
 # Open the file and get the data 
 
-wb = openpyxl.load_workbook('./Vocabulary lists (edited)/' + filename) # Open the file we will use
+wb = openpyxl.load_workbook(path + filename) # Open the file we will use
 sheet = wb.get_sheet_by_name('Sheet1') # Get the sheet
 
 
@@ -34,10 +35,10 @@ sheet = wb.get_sheet_by_name('Sheet1') # Get the sheet
 
 delta = datetime.timedelta(days=1)
 
-if dt_start.strftime('%m/%d/%Y') != sheet.cell(row=1, column=3).value:
+if dt_start.strftime('%m/%d/%Y') != sheet.cell(row=1, column=3).value: # If the start time is different
     print('Changing the dates')
     i=1
-    while (sheet.cell(row=i, column=1).value):
+    while (sheet.cell(row=i, column=1).value): # While there is a value
         test = (i-1) // words_per_day
         sheet.cell(row=i, column=3).value = (dt_start + delta * test).strftime('%m/%d/%Y')
         i += 1
@@ -61,7 +62,7 @@ while (date_test < dt):
     i += 1
 
 
-wb.save(filename)
+wb.save(path + filename)
 
 
 #==============================================================================
